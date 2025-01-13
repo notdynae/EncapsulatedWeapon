@@ -7,25 +7,42 @@ using System.Xml.Linq;
 
 internal class Enemy {
 
-	Random r = new Random();
-
 	public string Name {get; private set;}
-	private int health;
+	
+	private int _health;
 	public int Health {
-		get { return health; }
-		private set {
-			if (value < 0) health = 0;
-			else health = value;
-			return;
-		}
+		get => _health;
+		protected set => _health = value < 0 ? 0 : value;
 	}
-
-	public Enemy(string enemyName, int enemyHealth) {
-		Name = enemyName;
-		Health = enemyHealth;
+	private int _damage;
+	public int Damage {
+		get => _damage;
+		protected set => _damage = value < 0 ? 0 : value;
 	}
-
-	public void TakeDamage(int damage) {
+	
+	public bool IsDead => Health <= 0;
+	
+	public virtual void Attack() {
+		Console.WriteLine($"{Name} attacked, dealing {Damage} damage");
+	}
+	public virtual void TakeDamage(int damage) {
 		Health -= damage;
+		if (IsDead) Die();
+	}
+	public virtual void Die() {
+		Console.WriteLine("Enemy has died!");
+	}
+	
+	public Enemy(string name, int health, int damage) {
+		Name = name;
+		Health = health;
+		Damage = damage;
+	}
+}
+
+internal class Skeleton : Enemy
+{
+	public Skeleton(string name, int health, int damage) : base(name, health, damage)
+	{
 	}
 }

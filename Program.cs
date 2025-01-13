@@ -11,8 +11,8 @@ class Program
 		Weapon stoneSword = new Weapon("Stone Sword", 7, 40);
 		Weapon goldAxe = new Weapon("Gold Axe", 15, 25);
 
-		Enemy goblin = new Enemy("Goblin", 150);
-		Enemy zombie = new Enemy("Zombie", 500);
+		Enemy skeleton = new Enemy("Skeleton", 150, 15);
+		Enemy ghost = new Enemy("Ghost", 200, 20);
 
 		for (int i = 0; i < 15; i++) {
 			stoneSword.DealDamage(goblin);
