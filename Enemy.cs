@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 internal class Enemy {
 	
@@ -28,7 +23,9 @@ internal class Enemy {
 	public virtual void Attack() {
 		Console.WriteLine($"{Name} attacked, dealing {Damage} damage");
 	}
-	public virtual void TakeDamage(int damage) {
+	public virtual void TakeDamage(int damage)
+	{
+		Console.WriteLine($"Enemy took {damage} damage!");
 		Health -= damage;
 		if (IsDead) Die();
 	}
@@ -37,12 +34,12 @@ internal class Enemy {
 	}
 	
 	// ----------------------------------------------- constructor
-	public Enemy(string name, int health, int damage) {
+	public Enemy(string name, int health, int damage)
+	{
 		Name = name;
 		Health = health;
 		Damage = damage;
 	}
-	public Enemy (){}
 }
 
 internal class Skeleton : Enemy {
@@ -54,7 +51,7 @@ internal class Ghost : Enemy
 	public Ghost(string name, int health, int damage) : base(name, health, damage) {}
 
 	public override void TakeDamage(int damage) {
-		if (random.Next(0, 1) == 0) Console.WriteLine("Attack missed!");
+		if (random.Next(0, 2) == 1) Console.WriteLine("Attack missed!");
 		else base.TakeDamage(damage);
 	}
 }
@@ -65,11 +62,17 @@ internal class Boss : Enemy
 
 	public override void Attack()
 	{
-		switch (random.Next(0, 2))
+		switch (random.Next(0, 3))
 		{
-			case 0: Console.WriteLine($"{Name} wound up and attacked!");
+			case 0: 
+				Console.WriteLine($"{Name} wound up and attacked, dealing {Damage} damage!");
 				break;
-			case 1: Console.WriteLine($"{Name} shook the ground!");
+			case 1: 
+				Console.WriteLine($"{Name} shook the ground, dealing {Damage} damage!");
+				break;
+			case 2: 
+				Console.WriteLine($"{Name} blasted a fireball, dealing {Damage} damage!");
+				break;
 		}
 	}
 	
