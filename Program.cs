@@ -1,43 +1,31 @@
 ﻿using System;
 
-class Program
+namespace EncapsulatedWeapon
 {
-	static void Main(string[] args) {
+	internal static class Program
+	{
+		static void Main(string[] args) {
 		
-		Enemy skeleton = new Skeleton("Skeleton", 150, 15);
-		Enemy ghost = new Ghost("Ghost", 200, 20);
-		Enemy boss = new Boss("Lich", 500, 50);
+			// creating instances of all enemies
+			Enemy skeleton = new Skeleton("Skeleton", 150, 15);
+			Enemy ghost = new Ghost("Ghost", 200, 20);
+			Enemy boss = new Boss("Lich", 500, 50);
 		
-		skeleton.TakeDamage(5);
-		skeleton.Attack();
+			// basic skeleton tests, all 
+			skeleton.TakeDamage(5);
+			skeleton.Attack();
+			Console.WriteLine();
 		
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.TakeDamage(5);
-		ghost.Attack();
+			// repeats ghost taking damage, to see variation in results
+			for (var i=0; i<10; i++) { ghost.TakeDamage(5); }
+			ghost.Attack();
+			Console.WriteLine();
 		
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
-		boss.Attack();
+			// repeats boss attack, to see variation in results
+			for (var i=0; i<10; i++) { boss.Attack(); }
+			boss.TakeDamage(10);
 		
-		Console.ReadKey();
+			Console.ReadKey();
+		}
 	}
 }
